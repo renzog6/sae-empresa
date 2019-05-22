@@ -34,11 +34,10 @@
     </center>
     
     <top>          
-        <AnchorPane minHeight="50.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" BorderPane.alignment="CENTER">
+        <AnchorPane minHeight="50.0" prefHeight="50.0" BorderPane.alignment="CENTER">
             <children>
-                <TextField fx:id="searchBox" layoutX="127.0" layoutY="13.0" onInputMethodTextChanged="#Search" onKeyReleased="#Search" prefHeight="25.0" prefWidth="206.0" promptText="Buscar" />
-                <Button fx:id="btnSalir" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="26.0" layoutY="13.0" mnemonicParsing="false" text="Salir" />
-            <Label layoutX="508.0" layoutY="12.0" nodeOrientation="LEFT_TO_RIGHT" text="Lista de Repuestos">
+                <TextField fx:id="searchBox" layoutX="127.0" layoutY="13.0" onInputMethodTextChanged="#Search" onKeyReleased="#Search" prefHeight="30.0" prefWidth="200.0" promptText="Buscar" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="10.0" />
+            <Label layoutX="508.0" layoutY="12.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" text="Lista de Empresas" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

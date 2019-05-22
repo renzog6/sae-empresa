@@ -3,7 +3,7 @@ package ar.nex.empresa;
 import ar.nex.app.MainApp;
 import ar.nex.entity.Empresa;
 import ar.nex.service.JpaService;
-import ar.nex.util.DialogController;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -59,8 +59,7 @@ public class EmpresaController implements Initializable {
     private BorderPane bpEmpresa;
     @FXML
     private TextField searchBox;
-    @FXML
-    private Button btnSalir;
+    
     @FXML
     private AnchorPane menuPane;
     @FXML
@@ -111,13 +110,12 @@ public class EmpresaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            btnSalir.setOnAction(e -> MainApp.getInstance().close());
+        try {            
             jpa = new JpaService();
             initTable();
             loadData();
         } catch (Exception e) {
-            DialogController.showException(e);
+            EmpresaUtils.showException(e);
         }
     }
 
@@ -155,7 +153,7 @@ public class EmpresaController implements Initializable {
             });
             table.setItems(data);
         } catch (Exception e) {
-            DialogController.showException(e);
+            EmpresaUtils.showException(e);
         }
     }
 

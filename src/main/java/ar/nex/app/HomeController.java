@@ -1,8 +1,7 @@
 package ar.nex.app;
 
 import ar.nex.empresa.EmpresaController;
-import ar.nex.entity.Empresa;
-import ar.nex.util.DialogController;
+import ar.nex.empresa.EmpresaUtils;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -47,7 +46,7 @@ public class HomeController implements Initializable {
             EmpresaController empresa = new EmpresaController();
             btnEmpresa.setOnAction(e->bpHome.setCenter(empresa.getRoot()));
         } catch (Exception ex) {
-            DialogController.showException(ex);
+            EmpresaUtils.showException(ex);
         }
     }
 
@@ -57,7 +56,7 @@ public class HomeController implements Initializable {
             bpHome.getStylesheets().add("/fxml/" + ui + ".css");
             bpHome.setCenter(root);
         } catch (Exception ex) {
-            DialogController.showException(ex);
+            EmpresaUtils.showException(ex);
         }
     }
 
