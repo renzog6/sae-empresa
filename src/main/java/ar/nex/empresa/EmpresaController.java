@@ -1,8 +1,8 @@
 package ar.nex.empresa;
 
-import ar.nex.app.MainApp;
 import ar.nex.entity.Empresa;
 import ar.nex.service.JpaService;
+import ar.nex.util.DialogController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -115,7 +115,7 @@ public class EmpresaController implements Initializable {
             initTable();
             loadData();
         } catch (Exception e) {
-            EmpresaUtils.showException(e);
+            DialogController.showException(e);
         }
     }
 
@@ -153,7 +153,7 @@ public class EmpresaController implements Initializable {
             });
             table.setItems(data);
         } catch (Exception e) {
-            EmpresaUtils.showException(e);
+            DialogController.showException(e);
         }
     }
 

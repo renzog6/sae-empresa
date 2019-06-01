@@ -1,7 +1,7 @@
 package ar.nex.app;
 
 import ar.nex.empresa.EmpresaController;
-import ar.nex.empresa.EmpresaUtils;
+import ar.nex.util.DialogController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -27,9 +28,7 @@ public class HomeController implements Initializable {
     private BorderPane bpHome;
 
     @FXML
-    private Button btnEmpresa;
-
-    private Parent root;
+    private MenuButton mbEmpresa;
 
     /**
      * Initializes the controller class.
@@ -40,23 +39,21 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        try {
-            root = MainApp.getInstance().getRoot();
-            //btnEmpresa.setOnAction(e -> loadUI("empresa/Empresa"));
-            EmpresaController empresa = new EmpresaController();
-            btnEmpresa.setOnAction(e->bpHome.setCenter(empresa.getRoot()));
-        } catch (Exception ex) {
-            EmpresaUtils.showException(ex);
-        }
+      initMenu();
+    }
+    
+    private void initMenu() {
+        mbEmpresa.getItems().get(0).setOnAction(e -> loadUI("empresa/Empresa"));
+        //mbEquipo.getItems().get(1).setOnAction(e->loadUI("repuesto/Repuesto"));
     }
 
     public void loadUI(String ui) {
         try {
-            root = FXMLLoader.load(getClass().getResource("/fxml/" + ui + ".fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/" + ui + ".fxml"));
             bpHome.getStylesheets().add("/fxml/" + ui + ".css");
             bpHome.setCenter(root);
         } catch (Exception ex) {
-            EmpresaUtils.showException(ex);
+            DialogController.showException(ex);
         }
     }
 

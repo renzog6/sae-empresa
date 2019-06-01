@@ -77,9 +77,6 @@
                         </ImageView>
                     </graphic>
                 </Button>
-            <Button fx:id="btnAddModelo" minHeight="30.0" minWidth="85.0" mnemonicParsing="false" text="+ Equipos" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="20.0" />
-            <Button fx:id="btnAddProvedor" minHeight="30.0" minWidth="85.0" mnemonicParsing="false" text="+ Proveedor" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="20.0" />
-            <Button fx:id="btnAddMarca" minHeight="30.0" minWidth="85.0" mnemonicParsing="false" text="+ Marcas" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
             
             <Label fx:id="lblModelo" layoutX="14.0" layoutY="21.0" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="130.0">
                <font>
