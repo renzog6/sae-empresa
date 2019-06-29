@@ -1,6 +1,6 @@
 package ar.nex.empresa;
 
-import ar.nex.entity.Empresa;
+import ar.nex.entity.empresa.Empresa;
 import ar.nex.entity.ubicacion.Direccion;
 import ar.nex.ubicacion.DireccionEditController;
 import ar.nex.util.DialogController;

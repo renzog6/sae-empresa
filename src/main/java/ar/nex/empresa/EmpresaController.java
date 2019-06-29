@@ -1,9 +1,10 @@
 package ar.nex.empresa;
 
-import ar.nex.entity.Contacto;
-import ar.nex.entity.Empresa;
+import ar.nex.entity.ubicacion.Contacto;
+import ar.nex.entity.empresa.Empresa;
 import ar.nex.entity.ubicacion.Direccion;
 import ar.nex.service.JpaService;
+import ar.nex.ubicacion.ContactoEditController;
 import ar.nex.ubicacion.DireccionEditController;
 import ar.nex.util.DialogController;
 
@@ -52,6 +53,8 @@ import javafx.util.Callback;
  */
 public class EmpresaController implements Initializable {
 
+    private static final Logger LOG = Logger.getLogger(EmpresaController.class.getName());
+    
     public EmpresaController() {
         this.filteredData = new FilteredList<>(data);
     }
@@ -129,6 +132,7 @@ public class EmpresaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        LOG.info("initialize(URL url, ResourceBundle rb)");
         try {
             btnAdd.setOnAction(e -> add());
             btnEdit.setOnAction(e -> edit());
@@ -371,6 +375,28 @@ public class EmpresaController implements Initializable {
     }
 
     private void editContacto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+              try {
+            Stage dialog = new Stage();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ubicacion/ContactoEdit.fxml"));
+            ContactoEditController controller = new ContactoEditController(contactoSelect);
+            loader.setController(controller);
+
+            Scene scene = new Scene(loader.load());
+
+            dialog.setScene(scene);
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.resizableProperty().setValue(Boolean.FALSE);
+
+            dialog.showAndWait();
+
+            if (controller.getContacto() != null) {
+                empresaSelect.getContactoList().add(controller.getContacto());
+                jpa.getEmpresa().edit(empresaSelect);
+            }
+            loadDataContacto(empresaSelect.getContactoList());
+        } catch (Exception e) {
+            System.err.print(e);
+        }
     }
 }

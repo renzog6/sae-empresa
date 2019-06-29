@@ -1,7 +1,7 @@
 package ar.nex.empresa;
 
-import ar.nex.entity.Contacto;
-import ar.nex.entity.Rubro;
+import ar.nex.entity.ubicacion.Contacto;
+import ar.nex.entity.empresa.Rubro;
 import ar.nex.entity.ubicacion.Direccion;
 import java.util.List;
 import javafx.collections.FXCollections;

@@ -30,6 +30,10 @@ public class DireccionEditController implements Initializable {
         this.direccion = direccion;
     }
 
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
     @FXML
     private AnchorPane apDireccion;
     @FXML
@@ -69,7 +73,7 @@ public class DireccionEditController implements Initializable {
 
     private void initControls() {
         try {
-            btnCancelar.setOnAction(e -> ((Node) (e.getSource())).getScene().getWindow().hide());
+            btnCancelar.setOnAction(e -> cancelar(e));
             btnGuardar.setOnAction(e -> guardar(e));
 
             loadLocalidad();
@@ -130,7 +134,7 @@ public class DireccionEditController implements Initializable {
             txt = boxInfo.getText() != null ? boxInfo.getText() : "";
             direccion.setInfo(txt);
             direccion.setLocalidad(localidadSelect);
-            
+
             if (direccion.getIdDireccion() != null) {
                 jpa.getDireccion().edit(direccion);
                 direccion = null;
@@ -145,8 +149,10 @@ public class DireccionEditController implements Initializable {
         }
     }
 
-    public Direccion getDireccion() {
-        return direccion;
+    private void cancelar(ActionEvent e) {
+        direccion = null;
+        ((Node) (e.getSource())).getScene().getWindow().hide();
+        e.consume();
     }
 
 }
