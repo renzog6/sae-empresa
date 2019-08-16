@@ -176,8 +176,8 @@ public class EmpresaController implements Initializable {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Empresa, String> data) {
                 StringProperty str = new SimpleStringProperty("NN");
-                if ((data.getValue().getDomicilio() != null) && (data.getValue().getDomicilio().getLocalidad() != null)) {
-                    str = new SimpleStringProperty(data.getValue().getDomicilio().getLocalidad().getNombre());
+                if ((data.getValue().getDireccionList() != null) && (data.getValue().getDireccionList().size() >= 1)) {
+                    str = new SimpleStringProperty(data.getValue().getDireccionList().get(0).getLocalidad().getNombre());
                 }
                 return str;
             }

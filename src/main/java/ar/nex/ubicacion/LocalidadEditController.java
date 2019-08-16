@@ -54,7 +54,6 @@ public class LocalidadEditController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         jpa = new JpaService();
-
         initControls();
     }
 

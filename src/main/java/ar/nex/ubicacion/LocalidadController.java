@@ -1,7 +1,6 @@
 package ar.nex.ubicacion;
 
 import ar.nex.empresa.EmpresaController;
-import ar.nex.empresa.EmpresaDialogController;
 import ar.nex.entity.ubicacion.Localidad;
 import ar.nex.service.JpaService;
 import ar.nex.util.DialogController;

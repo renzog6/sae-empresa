@@ -64,10 +64,8 @@ public class DireccionEditController implements Initializable {
      * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL url, ResourceBundle rb) {        
         jpa = new JpaService();
-
         initControls();
     }
 
@@ -84,8 +82,8 @@ public class DireccionEditController implements Initializable {
                 boxNumero.setText(direccion.getNumero());
                 boxCodigo.setText(direccion.getCodigo());
                 boxInfo.setText(direccion.getInfo());
-                boxLocalidad.setText(direccion.getLocalidad().toString());
-                localidadSelect = direccion.getLocalidad();
+                localidadSelect = direccion.getLocalidad() != null? direccion.getLocalidad(): new Localidad("");
+                boxLocalidad.setText(localidadSelect.toString());                
             } else {
                 direccion = new Direccion();
                 boxNombre.setText("Principal");
