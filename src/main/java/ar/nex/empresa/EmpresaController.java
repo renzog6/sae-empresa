@@ -54,7 +54,7 @@ import javafx.util.Callback;
 public class EmpresaController implements Initializable {
 
     private static final Logger LOG = Logger.getLogger(EmpresaController.class.getName());
-    
+
     public EmpresaController() {
         this.filteredData = new FilteredList<>(data);
     }
@@ -63,7 +63,7 @@ public class EmpresaController implements Initializable {
         Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("/fxml/empresa/Empresa.fxml"));
-            root.setStyle("/fxml/empresa/Empresa.css");
+            root.setStyle("/css/empresa.css");
         } catch (IOException ex) {
             Logger.getLogger(EmpresaController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -176,10 +176,14 @@ public class EmpresaController implements Initializable {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Empresa, String> data) {
                 StringProperty str = new SimpleStringProperty("NN");
-                if ((data.getValue().getDireccionList() != null) && (data.getValue().getDireccionList().size() >= 1)) {
-                    str = new SimpleStringProperty(data.getValue().getDireccionList().get(0).getLocalidad().getNombre());
+                try {
+                    if ((data.getValue().getDireccionList() != null) && (data.getValue().getDireccionList().size() >= 1)) {
+                        str = new SimpleStringProperty(data.getValue().getDireccionList().get(0).getLocalidad().getNombre());
+                    }
+                    return str;
+                } catch (Exception e) {
+                    return str;
                 }
-                return str;
             }
         });
         //colRubro.setCellValueFactory(new PropertyValueFactory<>("codigo"));
@@ -290,10 +294,8 @@ public class EmpresaController implements Initializable {
     @FXML
     private void showOnClick(MouseEvent event) {
         empresaSelect = (Empresa) table.getSelectionModel().getSelectedItem();
-
         loadDataDireccion(empresaSelect.getDireccionList());
         loadDataContacto(empresaSelect.getContactoList());
-
         event.consume();
     }
 
@@ -364,6 +366,7 @@ public class EmpresaController implements Initializable {
                 jpa.getEmpresa().edit(empresaSelect);
             }
             loadDataDireccion(empresaSelect.getDireccionList());
+            loadData();
         } catch (Exception e) {
             System.err.print(e);
         }
@@ -375,7 +378,7 @@ public class EmpresaController implements Initializable {
     }
 
     private void editContacto() {
-              try {
+        try {
             Stage dialog = new Stage();
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ubicacion/ContactoEdit.fxml"));

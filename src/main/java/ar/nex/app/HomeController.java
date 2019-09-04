@@ -51,7 +51,7 @@ public class HomeController implements Initializable {
     public void loadUI(String ui) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/" + ui + ".fxml"));
-            bpHome.getStylesheets().add("/fxml/" + ui + ".css");
+            bpHome.getStylesheets().add("/css/" + ui + ".css");
             bpHome.setCenter(root);
         } catch (Exception ex) {
             DialogController.showException(ex);

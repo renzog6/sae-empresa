@@ -23,7 +23,6 @@ public class EmpesaUtil {
                 for (Rubro r : rubros) {
                     lst += r.getNombre() + " - ";
                 }
-
                 return lst.substring(0, lst.length() - 3);
             } else {
                 return rubros.get(0).getNombre();

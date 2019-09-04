@@ -2,6 +2,7 @@ package ar.nex.empresa;
 
 import ar.nex.entity.empresa.Empresa;
 import ar.nex.entity.ubicacion.Direccion;
+import ar.nex.service.JpaService;
 import ar.nex.ubicacion.DireccionEditController;
 import ar.nex.util.DialogController;
 import java.io.IOException;
@@ -56,6 +57,8 @@ public class EmpresaDialogController implements Initializable {
 
     private Empresa empresa;
 
+    private JpaService jpa;
+
     /**
      * Initializes the controller class.
      *
@@ -70,15 +73,19 @@ public class EmpresaDialogController implements Initializable {
 
     private void initControls() {
         try {
+            jpa = new JpaService();
+            
             btnCancelar.setOnAction(e -> ((Node) (e.getSource())).getScene().getWindow().hide());
             btnGuardar.setOnAction(e -> guardar(e));
             addDireccion.setOnAction(e -> addDirecion());
+
+            addRubro.setOnAction(e -> rubroSelect());
 
             if (empresa != null) {
                 boxNombre.setText(empresa.getNombre());
                 boxRSocial.setText(empresa.getRazonSocial());
                 boxCUIT.setText(empresa.getCuit());
-
+                boxRubro.setText(new EmpesaUtil().getListaRubrosString(empresa.getRubroList()));
             } else {
                 empresa = new Empresa();
                 boxNombre.setText("nueva");
@@ -91,9 +98,11 @@ public class EmpresaDialogController implements Initializable {
 
     private void guardar(ActionEvent e) {
         try {
-
+            if (empresa.getIdEmpresa() != null) {
+                jpa.getEmpresa().edit(empresa);
+            }
         } catch (Exception ex) {
-            DialogController.showException(ex);
+            ex.printStackTrace();
         } finally {
             ((Node) (e.getSource())).getScene().getWindow().hide();
         }
@@ -118,6 +127,35 @@ public class EmpresaDialogController implements Initializable {
         } catch (IOException e) {
             System.err.print(e);
 
+        }
+    }
+
+    private void rubroSelect() {
+        try {
+            Stage dialog = new Stage();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/empresa/RubroSelect.fxml"));
+            RubroSelectController controller;
+            if (empresa != null) {
+                controller = new RubroSelectController(empresa.getRubroList());
+            } else {
+                controller = new RubroSelectController(null);
+            }
+            loader.setController(controller);
+            Scene scene = new Scene(loader.load());
+
+            dialog.setScene(scene);
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.resizableProperty().setValue(Boolean.FALSE);
+            dialog.showAndWait();
+
+            if (controller.getRubroList() != null) {
+                boxRubro.setText(new EmpesaUtil().getListaRubrosString(controller.getRubroList()));
+                empresa.setRubroList(controller.getRubroList());
+            }
+
+        } catch (IOException e) {
+            System.err.print(e);
         }
     }
 }

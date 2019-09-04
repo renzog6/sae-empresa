@@ -50,8 +50,7 @@ public class LocalidadController implements Initializable {
     public Parent getRoot() {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/fxml/ubicacion/LocalidadList.fxml"));
-            root.setStyle("/fxml/empresa/Empresa.css");
+            root = FXMLLoader.load(getClass().getResource("/fxml/ubicacion/LocalidadList.fxml"));            
         } catch (IOException ex) {
             Logger.getLogger(EmpresaController.class.getName()).log(Level.SEVERE, null, ex);
         }
