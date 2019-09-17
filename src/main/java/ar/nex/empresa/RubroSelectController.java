@@ -2,7 +2,7 @@ package ar.nex.empresa;
 
 import ar.nex.entity.empresa.Rubro;
 import ar.nex.service.JpaService;
-import ar.nex.util.DialogController;
+import ar.nex.util.UtilDialog;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -14,7 +14,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +22,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import org.controlsfx.control.ListSelectionView;
 
 /**
  * FXML Controller class
@@ -93,7 +91,7 @@ public class RubroSelectController implements Initializable {
 
             btnAdd.setOnAction(e -> {
                 lstTarget.getItems().add(rubroSelect);
-                lstSource.getItems().remove(rubroSelect);                                
+                lstSource.getItems().remove(rubroSelect);
             });
 
             btnDel.setOnAction(e -> {
@@ -116,19 +114,21 @@ public class RubroSelectController implements Initializable {
 
             loadData();
         } catch (Exception ex) {
-            DialogController.showException(ex);
+            UtilDialog.showException(ex);
         }
     }
 
     private void loadData() {
         try {
             List<Rubro> lst = jpa.getRubro().findRubroEntities();
-            if (rubroList.size() > 0) {
-                for (Rubro r : rubroList) {
-                    lst.remove(r);
-                    dataTarget.add(r);
+            if (rubroList != null) {
+                if (!rubroList.isEmpty()) {
+                    for (Rubro r : rubroList) {
+                        lst.remove(r);
+                        dataTarget.add(r);
+                    }
+                    lstTarget.getItems().addAll(dataTarget);
                 }
-                lstTarget.getItems().addAll(dataTarget);
             }
 
             lst.forEach((item) -> {
@@ -136,7 +136,7 @@ public class RubroSelectController implements Initializable {
             });
             lstSource.getItems().addAll(dataSource);
         } catch (Exception e) {
-            DialogController.showException(e);
+            UtilDialog.showException(e);
         }
     }
 

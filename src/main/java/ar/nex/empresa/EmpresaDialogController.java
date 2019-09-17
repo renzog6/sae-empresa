@@ -4,10 +4,13 @@ import ar.nex.entity.empresa.Empresa;
 import ar.nex.entity.ubicacion.Direccion;
 import ar.nex.service.JpaService;
 import ar.nex.ubicacion.DireccionEditController;
-import ar.nex.util.DialogController;
+import ar.nex.util.UtilDialog;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -74,10 +77,21 @@ public class EmpresaDialogController implements Initializable {
     private void initControls() {
         try {
             jpa = new JpaService();
-            
+
             btnCancelar.setOnAction(e -> ((Node) (e.getSource())).getScene().getWindow().hide());
             btnGuardar.setOnAction(e -> guardar(e));
-            addDireccion.setOnAction(e -> addDirecion());
+            // addDireccion.setOnAction(e -> addDirecion());
+            addDireccion.setDisable(true);
+            addContacto.setDisable(true);
+            boxDireccion.setDisable(true);
+            boxContacto.setDisable(true);
+
+            boxNombre.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    boxRSocial.setText(newValue);
+                }
+            });
 
             addRubro.setOnAction(e -> rubroSelect());
 
@@ -92,14 +106,56 @@ public class EmpresaDialogController implements Initializable {
             }
 
         } catch (Exception ex) {
-            DialogController.showException(ex);
+            UtilDialog.showException(ex);
         }
+    }
+
+    private boolean isEmptytBox() {
+        if (boxNombre.getText().trim().isEmpty()) {
+            UtilDialog.errorDialog("Requiere valor", "Nombre es necesario");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    boxNombre.requestFocus();
+                }
+            });
+            return true;
+        } else if (boxRSocial.getText().trim().isEmpty()) {
+            UtilDialog.errorDialog("Requiere valor", "Razon Social es necesario");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    boxRSocial.requestFocus();
+                }
+            });
+            return true;
+        } else if (boxCUIT.getText().trim().isEmpty()) {
+            UtilDialog.errorDialog("Requiere valor", "CUIT es necesario");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    boxCUIT.requestFocus();
+                }
+            });
+            return true;
+        }
+
+        return false;
     }
 
     private void guardar(ActionEvent e) {
         try {
-            if (empresa.getIdEmpresa() != null) {
-                jpa.getEmpresa().edit(empresa);
+            if (!isEmptytBox()) {
+
+                empresa.setNombre(boxNombre.getText());
+                empresa.setRazonSocial(boxRSocial.getText());
+                empresa.setCuit(boxCUIT.getText());
+
+                if (empresa.getIdEmpresa() != null) {
+                    jpa.getEmpresa().edit(empresa);
+                } else {
+                    jpa.getEmpresa().create(empresa);
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -123,6 +179,7 @@ public class EmpresaDialogController implements Initializable {
             dialog.resizableProperty().setValue(Boolean.FALSE);
 
             dialog.showAndWait();
+            empresa.getDireccionList().add(controller.getDireccion());
 
         } catch (IOException e) {
             System.err.print(e);
@@ -133,6 +190,7 @@ public class EmpresaDialogController implements Initializable {
     private void rubroSelect() {
         try {
             Stage dialog = new Stage();
+            dialog.setTitle("Selecionar Rubros");
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/empresa/RubroSelect.fxml"));
             RubroSelectController controller;

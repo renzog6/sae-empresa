@@ -2,9 +2,8 @@ package ar.nex.ubicacion;
 
 import ar.nex.entity.ubicacion.Contacto;
 import ar.nex.entity.ubicacion.ContactoTipo;
-import ar.nex.entity.ubicacion.Direccion;
 import ar.nex.service.JpaService;
-import ar.nex.util.DialogController;
+import ar.nex.util.UtilDialog;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
@@ -102,7 +101,7 @@ public class ContactoEditController implements Initializable {
             }
 
         } catch (Exception ex) {
-            DialogController.showException(ex);
+            UtilDialog.showException(ex);
         }
     }
 
@@ -125,7 +124,7 @@ public class ContactoEditController implements Initializable {
                 jpa.getContacto().create(contacto);
             }
         } catch (Exception ex) {
-            DialogController.showException(ex);
+            UtilDialog.showException(ex);
         } finally {
             ((Node) (e.getSource())).getScene().getWindow().hide();
             e.consume();

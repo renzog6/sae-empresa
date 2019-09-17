@@ -3,7 +3,7 @@ package ar.nex.ubicacion;
 import ar.nex.entity.ubicacion.Localidad;
 import ar.nex.entity.ubicacion.Provincia;
 import ar.nex.service.JpaService;
-import ar.nex.util.DialogController;
+import ar.nex.util.UtilDialog;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -75,7 +75,7 @@ public class LocalidadEditController implements Initializable {
             }
 
         } catch (Exception ex) {
-            DialogController.showException(ex);
+            UtilDialog.showException(ex);
         }
     }
 
@@ -92,7 +92,7 @@ public class LocalidadEditController implements Initializable {
                 jpa.getLocalidad().create(localidad);
             }
         } catch (Exception ex) {
-            DialogController.showException(ex);
+            UtilDialog.showException(ex);
         } finally {
             ((Node) (e.getSource())).getScene().getWindow().hide();
             e.consume();

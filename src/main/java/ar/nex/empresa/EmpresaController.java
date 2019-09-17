@@ -6,7 +6,8 @@ import ar.nex.entity.ubicacion.Direccion;
 import ar.nex.service.JpaService;
 import ar.nex.ubicacion.ContactoEditController;
 import ar.nex.ubicacion.DireccionEditController;
-import ar.nex.util.DialogController;
+import ar.nex.util.UtilDialog;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -139,7 +140,7 @@ public class EmpresaController implements Initializable {
 
             startTask();
         } catch (Exception e) {
-            DialogController.showException(e);
+            UtilDialog.showException(e);
         }
     }
 
@@ -266,7 +267,7 @@ public class EmpresaController implements Initializable {
             });
             table.setItems(data);
         } catch (Exception e) {
-            DialogController.showException(e);
+            UtilDialog.showException(e);
         }
     }
 

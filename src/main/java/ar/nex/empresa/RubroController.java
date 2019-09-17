@@ -2,7 +2,7 @@ package ar.nex.empresa;
 
 import ar.nex.entity.empresa.Rubro;
 import ar.nex.service.JpaService;
-import ar.nex.util.DialogController;
+import ar.nex.util.UtilDialog;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -98,7 +98,7 @@ public class RubroController implements Initializable {
 
             startTask();
         } catch (Exception e) {
-            DialogController.showException(e);
+            UtilDialog.showException(e);
         }
     }
 
@@ -132,7 +132,7 @@ public class RubroController implements Initializable {
             colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
             colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         } catch (Exception e) {
-            DialogController.showException(e);
+            UtilDialog.showException(e);
         }
     }
 
@@ -145,7 +145,7 @@ public class RubroController implements Initializable {
             });
             table.setItems(data);
         } catch (Exception e) {
-            DialogController.showException(e);
+            UtilDialog.showException(e);
         }
     }
 

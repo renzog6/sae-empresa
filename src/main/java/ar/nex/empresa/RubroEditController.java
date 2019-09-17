@@ -2,7 +2,7 @@ package ar.nex.empresa;
 
 import ar.nex.entity.empresa.Rubro;
 import ar.nex.service.JpaService;
-import ar.nex.util.DialogController;
+import ar.nex.util.UtilDialog;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -77,7 +77,7 @@ public class RubroEditController implements Initializable {
             }
 
         } catch (Exception ex) {
-            DialogController.showException(ex);
+            UtilDialog.showException(ex);
         }
     }
 
@@ -93,7 +93,7 @@ public class RubroEditController implements Initializable {
                 jpa.getRubro().create(rubro);
             }
         } catch (Exception ex) {
-            DialogController.showException(ex);
+            UtilDialog.showException(ex);
         } finally {
             ((Node) (e.getSource())).getScene().getWindow().hide();
             e.consume();

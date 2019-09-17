@@ -3,7 +3,7 @@ package ar.nex.ubicacion;
 import ar.nex.empresa.EmpresaController;
 import ar.nex.entity.ubicacion.Localidad;
 import ar.nex.service.JpaService;
-import ar.nex.util.DialogController;
+import ar.nex.util.UtilDialog;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -105,7 +105,7 @@ public class LocalidadController implements Initializable {
 
             startTask();
         } catch (Exception e) {
-            DialogController.showException(e);
+            UtilDialog.showException(e);
         }
     }
 
@@ -149,7 +149,7 @@ public class LocalidadController implements Initializable {
             colInfo.setCellValueFactory(new PropertyValueFactory<>("idLocalidad"));
 
         } catch (Exception e) {
-            DialogController.showException(e);
+            UtilDialog.showException(e);
         }
     }
 
@@ -162,7 +162,7 @@ public class LocalidadController implements Initializable {
             });
             table.setItems(data);
         } catch (Exception e) {
-            DialogController.showException(e);
+            UtilDialog.showException(e);
         }
     }
 

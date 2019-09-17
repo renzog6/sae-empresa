@@ -2,7 +2,7 @@ package ar.nex.app;
 
 import ar.nex.empresa.RubroController;
 import ar.nex.ubicacion.LocalidadController;
-import ar.nex.util.DialogController;
+import ar.nex.util.UtilDialog;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -54,7 +54,7 @@ public class HomeController implements Initializable {
             bpHome.getStylesheets().add("/css/" + ui + ".css");
             bpHome.setCenter(root);
         } catch (Exception ex) {
-            DialogController.showException(ex);
+            UtilDialog.showException(ex);
         }
     }
     
@@ -62,7 +62,7 @@ public class HomeController implements Initializable {
         try {
             bpHome.setCenter(root);
         } catch (Exception ex) {
-            DialogController.showException(ex);
+            UtilDialog.showException(ex);
         }
     }
 

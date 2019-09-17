@@ -1,7 +1,7 @@
 package ar.nex.app;
 
 import ar.nex.entity.Usuario;
-import ar.nex.util.DialogController;
+import ar.nex.util.UtilDialog;
 import java.io.IOException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -51,7 +51,7 @@ public class MainApp extends Application {
             stage.setOnCloseRequest(e->close());
             stage.show();
         } catch (IOException e) {
-            DialogController.showException(e);
+            UtilDialog.showException(e);
         }
     }
     

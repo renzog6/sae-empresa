@@ -3,7 +3,7 @@ package ar.nex.ubicacion;
 import ar.nex.entity.ubicacion.Direccion;
 import ar.nex.entity.ubicacion.Localidad;
 import ar.nex.service.JpaService;
-import ar.nex.util.DialogController;
+import ar.nex.util.UtilDialog;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -90,7 +90,7 @@ public class DireccionEditController implements Initializable {
             }
 
         } catch (Exception ex) {
-            DialogController.showException(ex);
+            UtilDialog.showException(ex);
         }
     }
 
@@ -140,7 +140,7 @@ public class DireccionEditController implements Initializable {
                 jpa.getDireccion().create(direccion);
             }
         } catch (Exception ex) {
-            DialogController.showException(ex);
+            UtilDialog.showException(ex);
         } finally {
             ((Node) (e.getSource())).getScene().getWindow().hide();
             e.consume();
