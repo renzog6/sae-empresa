@@ -22,6 +22,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javax.persistence.TypedQuery;
 
 /**
  * FXML Controller class
@@ -120,7 +121,10 @@ public class RubroSelectController implements Initializable {
 
     private void loadData() {
         try {
-            List<Rubro> lst = jpa.getRubro().findRubroEntities();
+            TypedQuery<Rubro> query
+                    = jpa.getFactory().createEntityManager().createQuery("SELECT s FROM Rubro s ORDER BY s.nombre ASC", Rubro.class);
+            List<Rubro> lst = query.getResultList();
+
             if (rubroList != null) {
                 if (!rubroList.isEmpty()) {
                     for (Rubro r : rubroList) {

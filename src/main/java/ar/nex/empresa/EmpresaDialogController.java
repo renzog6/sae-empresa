@@ -156,11 +156,10 @@ public class EmpresaDialogController implements Initializable {
                 } else {
                     jpa.getEmpresa().create(empresa);
                 }
+                ((Node) (e.getSource())).getScene().getWindow().hide();
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            ((Node) (e.getSource())).getScene().getWindow().hide();
         }
     }
 
