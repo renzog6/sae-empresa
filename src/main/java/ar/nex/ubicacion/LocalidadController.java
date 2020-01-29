@@ -50,7 +50,8 @@ public class LocalidadController implements Initializable {
     public Parent getRoot() {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/fxml/ubicacion/LocalidadList.fxml"));            
+            root = FXMLLoader.load(getClass().getResource("/fxml/ubicacion/LocalidadList.fxml"));
+            root.setStyle("/css/localidad.css");
         } catch (IOException ex) {
             Logger.getLogger(EmpresaController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -137,7 +138,7 @@ public class LocalidadController implements Initializable {
         try {
             colLocalidad.setCellValueFactory(new PropertyValueFactory<>("nombre"));
             colCPostal.setCellValueFactory(new PropertyValueFactory<>("codigoPostal"));
-           
+
             colProvincia.setCellValueFactory(new PropertyValueFactory<>("provincia"));
             colPCodigo.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Localidad, String>, ObservableValue<String>>() {
                 @Override

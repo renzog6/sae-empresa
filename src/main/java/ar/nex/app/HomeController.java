@@ -1,5 +1,6 @@
 package ar.nex.app;
 
+import ar.nex.empresa.EmpresaController;
 import ar.nex.empresa.RubroController;
 import ar.nex.ubicacion.LocalidadController;
 import ar.nex.util.UtilDialog;
@@ -43,22 +44,12 @@ public class HomeController implements Initializable {
     }
 
     private void initMenu() {
-        mbEmpresa.getItems().get(0).setOnAction(e -> loadUI("empresa/Empresa"));
+        mbEmpresa.getItems().get(0).setOnAction(e -> loadUI(new EmpresaController().getRoot()));
         mbEmpresa.getItems().get(2).setOnAction(e -> loadUI(new LocalidadController().getRoot()));
         mbEmpresa.getItems().get(3).setOnAction(e -> loadUI(new RubroController().getRoot()));
     }
 
-    public void loadUI(String ui) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/" + ui + ".fxml"));
-            bpHome.getStylesheets().add("/css/" + ui + ".css");
-            bpHome.setCenter(root);
-        } catch (Exception ex) {
-            UtilDialog.showException(ex);
-        }
-    }
-    
-        public void loadUI(Parent root) {
+    public void loadUI(Parent root) {
         try {
             bpHome.setCenter(root);
         } catch (Exception ex) {

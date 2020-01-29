@@ -43,9 +43,8 @@ public class MainApp extends Application {
     private void showHome() {
         try {
             root = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
-
             scene = new Scene(root);
-            scene.getStylesheets().add("/fxml/Home.css");
+            scene.getStylesheets().add("/css/home.css");
             stage.setScene(scene);
             stage.setMaximized(true);
             stage.setOnCloseRequest(e->close());
